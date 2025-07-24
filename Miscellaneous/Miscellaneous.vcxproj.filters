@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bool64.h">
+    <ClInclude Include="Include\Bool64.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bool64Def.h">
+    <ClInclude Include="Include\Bool64Def.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
