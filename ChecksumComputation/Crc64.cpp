@@ -51,7 +51,7 @@ namespace ChecksumComputation
 		{
 			for (size_t j = 0; j < 8; ++j)
 			{
-				bool bitSet = CheckBitSet(_crc64, 63);
+				bool bitSet = CheckTopCrc64BitSet();
 				_crc64 = _crc64 << 1;
 				if (bitSet)
 					_crc64 = _crc64 ^ _crcDivisor;
@@ -68,7 +68,7 @@ namespace ChecksumComputation
 	{
 		for (size_t i = 0; i < 8; ++i)
 		{
-			bool crcBitSet = CheckBitSet(_crc64, 63);
+			bool crcBitSet = CheckTopCrc64BitSet();
 			_crc64 = _crc64 << 1;
 			if (CheckBitSet(nextReadByte, 7 - i))
 				_crc64++;
@@ -77,9 +77,9 @@ namespace ChecksumComputation
 		}
 	}
 
-	bool Crc64::CheckBitSet(uint64_t value, uint64_t bitNumber) const noexcept
+	bool Crc64::CheckTopCrc64BitSet() const noexcept
 	{
-		uint64_t bitValue = value & (1ULL << bitNumber);
+		uint64_t bitValue = _crc64 & (1ULL << 63);
 		return bitValue > 0;
 	}
 

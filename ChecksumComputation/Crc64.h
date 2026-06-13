@@ -23,7 +23,7 @@ namespace ChecksumComputation
 
 		void ProcessByte(unsigned char nextReadByte) noexcept;
 
-		bool CheckBitSet(uint64_t value, uint64_t bitNumber) const noexcept;
+		bool CheckTopCrc64BitSet() const noexcept;
 		bool CheckBitSet(unsigned char value, uint64_t bitNumber) const noexcept;
 	};
 }
