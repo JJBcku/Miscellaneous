@@ -19,7 +19,7 @@ namespace ChecksumComputation
 	private:
 		uint64_t _crc64;
 		uint64_t _crcDivisor;
-		uint64_t _bytesRead;
+		size_t _bytesRead;
 
 		void ProcessByte(unsigned char nextReadByte) noexcept;
 

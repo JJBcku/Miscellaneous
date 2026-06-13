@@ -41,6 +41,8 @@ namespace ChecksumComputation
 			ProcessByte(*processedDataPointer);
 			processedDataPointer++;
 		}
+
+		_bytesRead += dataSize;
 	}
 
 	void Crc64::Finalize() noexcept
