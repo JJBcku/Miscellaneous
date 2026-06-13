@@ -4,5 +4,6 @@
 #include "framework.h"
 
 #include <stdint.h>
+#include <algorithm>
 
 #endif
