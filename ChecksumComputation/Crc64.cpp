@@ -3,15 +3,15 @@
 
 namespace ChecksumComputation
 {
-	Crc64::Crc64(uint64_t crcDivisor) : crc64(0), crcDivisor(crcDivisor), bytesRead(0)
+	Crc64::Crc64(uint64_t crcDivisor) : _crc64(0), _crcDivisor(crcDivisor), _bytesRead(0)
 	{
 	}
 
-	void Crc64::Initialize(uint64_t divisor)
+	void Crc64::Initialize(uint64_t crcDivisor)
 	{
-		crc64 = 0;
-		this->crcDivisor = divisor;
-		bytesRead = 0;
+		_crc64 = 0;
+		_crcDivisor = crcDivisor;
+		_bytesRead = 0;
 	}
 
 	void Crc64::ProcessData(void* data, size_t dataSize) noexcept
@@ -22,15 +22,15 @@ namespace ChecksumComputation
 		unsigned char* dataPointer = reinterpret_cast<unsigned char*>(data);
 
 		uint64_t bytesToDirectlyCopy = 0;
-		if (bytesRead < 8)
+		if (_bytesRead < 8)
 		{
-			uint64_t spacesLeft = 8 - bytesRead;
+			uint64_t spacesLeft = 8 - _bytesRead;
 			bytesToDirectlyCopy = std::min(spacesLeft, dataSize);
 
 			for (size_t i = 0; i < bytesToDirectlyCopy; ++i)
 			{
-				crc64 = crc64 << 8;
-				crc64 += dataPointer[i];
+				_crc64 = _crc64 << 8;
+				_crc64 += dataPointer[i];
 			}
 		}
 
@@ -45,30 +45,35 @@ namespace ChecksumComputation
 
 	void Crc64::Finalize() noexcept
 	{
-		uint64_t bytesLeft = std::min(bytesRead, 8ULL);
+		uint64_t bytesLeft = std::min(_bytesRead, 8ULL);
 
 		for (size_t i = 0; i < bytesLeft; ++i)
 		{
 			for (size_t j = 0; j < 8; ++j)
 			{
-				bool bitSet = CheckBitSet(crc64, 63);
-				crc64 = crc64 << 1;
+				bool bitSet = CheckBitSet(_crc64, 63);
+				_crc64 = _crc64 << 1;
 				if (bitSet)
-					crc64 = crc64 ^ crcDivisor;
+					_crc64 = _crc64 ^ _crcDivisor;
 			}
 		}
+	}
+
+	uint64_t Crc64::GetCrc64() const
+	{
+		return _crc64;
 	}
 
 	void Crc64::ProcessByte(unsigned char nextReadByte) noexcept
 	{
 		for (size_t i = 0; i < 8; ++i)
 		{
-			bool crcBitSet = CheckBitSet(crc64, 63);
-			crc64 = crc64 << 1;
+			bool crcBitSet = CheckBitSet(_crc64, 63);
+			_crc64 = _crc64 << 1;
 			if (CheckBitSet(nextReadByte, 7 - i))
-				crc64++;
+				_crc64++;
 			if (crcBitSet)
-				crc64 = crc64 ^ crcDivisor;
+				_crc64 = _crc64 ^ _crcDivisor;
 		}
 	}
 

@@ -10,14 +10,16 @@ namespace ChecksumComputation
 	public:
 		Crc64(uint64_t crcDivisor = 0);
 
-		void Initialize(uint64_t divisor);
+		void Initialize(uint64_t crcDivisor);
 		void ProcessData(void* data, size_t dataSize) noexcept;
 		void Finalize() noexcept;
 
+		uint64_t GetCrc64() const;
+
 	private:
-		uint64_t crc64;
-		uint64_t crcDivisor;
-		uint64_t bytesRead;
+		uint64_t _crc64;
+		uint64_t _crcDivisor;
+		uint64_t _bytesRead;
 
 		void ProcessByte(unsigned char nextReadByte) noexcept;
 
