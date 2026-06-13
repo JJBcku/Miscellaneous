@@ -3,11 +3,11 @@
 
 namespace ChecksumComputation
 {
-	Crc64::Crc64(uint64_t crcDivisor) : _crc64(0), _crcDivisor(crcDivisor), _bytesRead(0)
+	Crc64::Crc64(uint64_t crcDivisor) noexcept : _crc64(0), _crcDivisor(crcDivisor), _bytesRead(0)
 	{
 	}
 
-	void Crc64::Initialize(uint64_t crcDivisor)
+	void Crc64::Initialize(uint64_t crcDivisor) noexcept
 	{
 		_crc64 = 0;
 		_crcDivisor = crcDivisor;
@@ -59,7 +59,7 @@ namespace ChecksumComputation
 		}
 	}
 
-	uint64_t Crc64::GetCrc64() const
+	uint64_t Crc64::GetCrc64() const noexcept
 	{
 		return _crc64;
 	}

@@ -8,13 +8,13 @@ namespace ChecksumComputation
 	class Crc64
 	{
 	public:
-		Crc64(uint64_t crcDivisor = 0);
+		Crc64(uint64_t crcDivisor = 0) noexcept;
 
-		void Initialize(uint64_t crcDivisor);
+		void Initialize(uint64_t crcDivisor) noexcept;
 		void ProcessData(void* data, size_t dataSize) noexcept;
 		void Finalize() noexcept;
 
-		uint64_t GetCrc64() const;
+		uint64_t GetCrc64() const noexcept;
 
 	private:
 		uint64_t _crc64;
