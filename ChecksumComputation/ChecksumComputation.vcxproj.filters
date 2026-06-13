@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="DoNotInclude\framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="DoNotInclude\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Crc64.h">
+    <ClInclude Include="Include\Crc64.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="DoNotInclude\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Crc64.cpp">
+    <ClCompile Include="DoNotInclude\Crc64.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
